@@ -6,30 +6,14 @@ const express = require("express"),
     Comment = require('./models/comment'),
     seedDB = require('./seeds.js');
 
-seedDB();
+
 mongoose.connect("mongodb://localhost/yelp_camp", {
     useUnifiedTopology: true,
     useNewUrlParser: true
 });
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
-
-
-// Campground.create({
-//         name: "The Mountains",
-//         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTv2RQ7Vzt_7N3FLiDsWFaXScY17PA0ffrJg-4SU0l2KVRIEMzd&s",
-//         description: "This is a huge mountain in the World! But no bathrooms. No water!"
-//     },
-//     (err, campground) => {
-//         if (err) {
-//             console.log("SOMETHING WENT WRONG");
-//             console.log(err);
-//         } else {
-//             console.log("Added campground!");
-//             console.log(campground);
-//         }
-//     }
-// );
+seedDB();
 
 app.get("/", (req, res) => {
     res.render("landing");
@@ -71,10 +55,11 @@ app.get("/campgrounds/new", (req, res) => {
 
 app.get("/campgrounds/:id", (req, res) => {
     // var id = req.params.id;
-    Campground.findById(req.params.id, (err, foundCampground) => {
+    Campground.findById(req.params.id).populate("comments").exec((err, foundCampground) => {
         if (err) {
             console.log(err);
         } else {
+            console.log(foundCampground);
             res.render("show", { campground: foundCampground });
         }
     });
