@@ -25,7 +25,7 @@ app.get("/campgrounds", (req, res) => {
             console.log("SOMETHING WENT WRONG");
             console.log(err);
         } else {
-            res.render("index", { campgrounds: allCampgrounds });
+            res.render("campgrounds/index", { campgrounds: allCampgrounds });
         }
     });
 });
@@ -50,7 +50,7 @@ app.post("/campgrounds", (req, res) => {
 });
 
 app.get("/campgrounds/new", (req, res) => {
-    res.render("new");
+    res.render("campgrounds/new");
 });
 
 app.get("/campgrounds/:id", (req, res) => {
@@ -60,9 +60,17 @@ app.get("/campgrounds/:id", (req, res) => {
             console.log(err);
         } else {
             console.log(foundCampground);
-            res.render("show", { campground: foundCampground });
+            res.render("campgrounds/show", { campground: foundCampground });
         }
     });
+});
+
+//===========================
+//Comments routes
+//===========================
+
+app.get('/campgrounds/:id/comments/new', (req, res) => {
+    res.render("comments/new");
 });
 
 app.listen(3000, () => {
