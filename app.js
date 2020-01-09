@@ -3,6 +3,7 @@ const express = require("express"),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),
     Campground = require('./models/campground'),
+    Comment = require('./models/comment'),
     seedDB = require('./seeds.js');
 
 seedDB();
