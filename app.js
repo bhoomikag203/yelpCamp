@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 console.log(__dirname);
-seedDB();
+// seedDB();seed the database
 
 //password configuration
 app.use(require('express-session')({
