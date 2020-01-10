@@ -121,6 +121,30 @@ app.post('/campgrounds/:id/comments', (req, res) => {
     });
 });
 
+//==================================
+//AUTH ROUTES
+//==================================
+
+//signup form
+app.get('/register', (req, res) => {
+    res.render("register")
+});
+
+//signup logic
+app.post("/register", function(req, res) {
+    var newUser = new User({ username: req.body.username });
+    User.register(newUser, req.body.password, function(err, user) {
+        if (err) {
+            console.log(err);
+            return res.render("register");
+        }
+        passport.authenticate("local")(req, res, function() {
+            console.log(newUser);
+            res.redirect("/campgrounds");
+        });
+    });
+});
+
 app.listen(3000, () => {
     console.log(`The YelpCamp Server Has Started!!`);
 });
