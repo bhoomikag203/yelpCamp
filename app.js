@@ -2,8 +2,11 @@ const express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local'),
     Campground = require('./models/campground'),
     Comment = require('./models/comment'),
+    User = require('./models/user'),
     seedDB = require('./seeds.js');
 
 
@@ -16,6 +19,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 console.log(__dirname);
 seedDB();
+
 
 app.get("/", (req, res) => {
     res.render("landing");
