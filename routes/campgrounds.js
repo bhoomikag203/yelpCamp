@@ -60,7 +60,6 @@ router.get("/:id", (req, res) => {
 router.get('/:id/edit', (req, res) => {
     Campground.findById(req.params.id, (err, foundCampground) => {
         if (err) {
-            console.log(err);
             res.redirect("/campgrounds");
         } else {
             res.render('campgrounds/edit', { campground: foundCampground });
@@ -73,11 +72,21 @@ router.put('/:id', (req, res) => {
     //find and update correct campground
     Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updatedCampground) => {
         if (err) {
-            console.log(err);
             res.redirect("/campgrounds");
         } else {
             //redirect to show page
             res.redirect("/campgrounds/" + req.params.id);
+        }
+    });
+});
+
+//destroy  ('/campgrounds/:id')
+router.delete('/:id', (req, res) => {
+    Campground.findByIdAndRemove(req.params.id, (err) => {
+        if (err) {
+            res.redirect("/campgrounds");
+        } else {
+            res.redirect("/campgrounds");
         }
     });
 });
