@@ -20,6 +20,20 @@ app.use(express.static(__dirname + "/public"));
 console.log(__dirname);
 seedDB();
 
+//password configuration
+app.use(require('express-session')({
+    secret: "This is yelp camp application",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+passport.authenticate
+
 
 app.get("/", (req, res) => {
     res.render("landing");
