@@ -48,7 +48,7 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
 });
 
 //edit comment
-router.get('/:comment_id/edit', middleware.checkCommentOwnership, (req, res) => {
+router.get('/:comment_id/edit', middleware.isLoggedIn, middleware.checkCommentOwnership, (req, res) => {
     Comment.findById(req.params.comment_id, (err, foundComment) => {
         if (err) {
             res.redirect('back');
