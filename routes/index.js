@@ -34,12 +34,12 @@ router.get('/login', (req, res) => {
 });
 
 //login logic
-router.post('/login', passport.authenticate("local", {
+router.post("/login", passport.authenticate("local", {
     successRedirect: "/campgrounds",
-    failureRedirect: "/login"
-}), (req, res) => {
-    res.send("Logged in");
-});
+    failureRedirect: "/login",
+    failureFlash: true,
+    successFlash: 'Welcome to YelpCamp!'
+}), function(req, res) {});
 
 //logout
 router.get('/logout', (req, res) => {

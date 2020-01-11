@@ -2,6 +2,10 @@ body {
     background: pink;
 }
 
+.username {
+    text-transform: capitalize;
+}
+
 .thumbnail img {
     width: 100%;
 }
