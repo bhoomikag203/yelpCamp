@@ -20,7 +20,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <%if(!currentUser){%>
                         <li><a href="/login">Login</a></li>
-                        <li><a href="/register">Sing up</a></li>
+                        <li><a href="/register">Sign up</a></li>
                         <%}else{%>
                             <li><a>Signed In As
                                 <%= currentUser.username %></a>
@@ -31,3 +31,17 @@
             </div>
         </div>
     </nav>
+    <div class="container">
+        <% if(error && error.length >0){%>
+            <div class="alert alert-danger">
+                <%= error %>
+            </div>
+            <% }%>
+
+                <% if(success && success.length >0){%>
+                    <div class="alert alert-success">
+                        <%= success %>
+                    </div>
+                    <% }%>
+
+    </div>
